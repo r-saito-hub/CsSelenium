@@ -1,8 +1,10 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Threading;
+using System.Text;
 
 namespace CsSelenium
 {
@@ -57,10 +59,14 @@ namespace CsSelenium
                     }
                 }
 
-                // 記事のタイトルをコンソールに表示
-                foreach (var text in allElementTexts)
+                using (StreamWriter sw = new StreamWriter(@"C:\Users\USER\source\repos\CsSelenium\senpakulist.csv", false,
+                                          Encoding.GetEncoding("shift-jis")))
                 {
-                    Console.WriteLine(text);
+                    // csv書き込み
+                    foreach (var text in allElementTexts)
+                    {
+                        sw.WriteLine(text);
+                    }
                 }
 
                 // ブラウザを閉じる
